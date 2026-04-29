@@ -14,3 +14,11 @@ https://forms.office.com/Pages/ResponsePage.aspx?id=mTIMqd4rdEaitViOIeVBUuX0c1Nv
 
 Technical users:
 https://forms.office.com/Pages/ResponsePage.aspx?id=mTIMqd4rdEaitViOIeVBUuX0c1NvjWJDnvAGOiux-lhUQTVIRDZHM1I3MEtHMlFTVDBRMVlRU0xKTC4u
+
+
+
+
+For those who want to test the logged in user flow you can either register or use the test log in 
+
+email : Johnsmith@gmail.com
+password: HelloHello
