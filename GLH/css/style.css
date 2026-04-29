@@ -1,0 +1,778 @@
+
+
+
+*, *::before, *::after {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-overflow-scrolling: touch;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  font-size: 16px; 
+  line-height: 1.5;
+}
+
+body {
+  /* Mobile base */
+  font-family: -apple-system, BlinkMacSystemFont, 'Roboto', 'Open Sans', 'Segoe UI', system-ui, sans-serif;
+  font-size: 0.95rem; /* 15px for phone */
+  line-height: 1.6;
+  color: #333;
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden; /* No horizontal scroll */
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+main {
+  flex: 1;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  -webkit-touch-callout: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Container - since the phone is narrow */
+.container {
+  width: 100%;
+  max-width: none;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* ============================================
+   Header / Navigation - hamburger menu for the phone
+   ============================================ */
+header {
+  background-color: #266426;
+  padding: 0.75rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo img {
+  height: 3rem; 
+  width: auto;
+}
+
+.logo h1 {
+  color: #ffffff;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+/* Hamburger button - mobile only */
+.hamburger {
+  display: block;
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.hamburger span {
+  display: block;
+  height: 3px;
+  width: 1.5rem;
+  background: #ffffff;
+  margin: 0.25rem 0;
+  transition: 0.3s;
+  border-radius: 2px;
+}
+
+/* mobile nav */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: #266426;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+nav.active {
+  transform: translateX(0);
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: center;
+}
+
+nav ul li a {
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 1rem 1.5rem;
+  border-radius: 0.5rem;
+  display: block;
+  min-height: 3rem; 
+  line-height: 1.2;
+  transition: background-color 0.3s;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+  background-color: #1a4a1a;
+}
+
+/* Hide hamburger on desktop */
+@media (min-width: 769px) {
+  .hamburger {
+    display: none;
+  }
+  
+  nav {
+    position: static;
+    transform: none;
+    height: auto;
+    background: transparent;
+    display: block !important;
+  }
+  
+  nav ul {
+    flex-direction: row;
+    gap: 1.5rem;
+  }
+  
+  nav ul li a {
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+    min-height: auto;
+  }
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.trolley-icon {
+  background-color: #642664;
+  color: #ffffff;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 3rem; 
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.trolley-icon:hover {
+  background-color: #4a1a4a;
+}
+
+.trolley-icon img {
+  height: 1.5rem !important;
+  width: auto !important;
+}
+
+/* Buttons Touch friendly */
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-align: center;
+  min-height: 3rem; /* 48px touch */
+  line-height: 1.2;
+ 
+  touch-action: manipulation;
+}
+
+.btn-primary { background-color: #266426; color: #ffffff; }
+.btn-primary:hover { background-color: #1a4a1a; }
+.btn-secondary { background-color: #642664; color: #ffffff; }
+.btn-secondary:hover { background-color: #4a1a4a; }
+.btn-dark { background-color: #222; color: #ffffff; }
+.btn-dark:hover { background-color: #000; }
+.btn-add {
+  background-color: #266426;
+  color: #ffffff;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Forms Mobile optimized */
+.form-container {
+  margin: 2rem auto;
+  padding: 2rem 1.5rem;
+  background-color: #f9f9f9;
+  border-radius: 1rem;
+  box-shadow: 0 0.25rem 1rem rgba(0,0,0,0.1);
+  max-width: 28rem; /* ~450px */
+  width: 100%;
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.875rem;
+  border: 2px solid #ddd;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  background: white;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 500;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s;
+}
+
+.radio-label:hover {
+  background-color: #f5f5f5;
+}
+
+.radio-label input[type="radio"] {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-right: 0.75rem;
+  accent-color: #266426;
+  cursor: pointer;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #266426;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(38, 100, 38, 0.1);
+}
+
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 2rem 0;
+}
+
+.hero-card {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 0.25rem 1rem rgba(0,0,0,0.1);
+}
+
+.hero-card img {
+  width: 100%;
+  height: 40vh; /* Flexible viewport height */
+  object-fit: cover;
+}
+
+.hero-card .overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(38, 100, 38, 0.9);
+  padding: 2rem 1.5rem;
+  color: #ffffff;
+}
+
+.hero-card .overlay h2 {
+  font-size: 1.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.hero-card .overlay p {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+
+.product-grid,
+.farmer-grid,
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  padding: 2rem 0;
+}
+
+.product-card,
+.farmer-card {
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 0.25rem 1rem rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+
+.product-card:hover,
+.farmer-card:hover {
+  transform: translateY(-0.25rem);
+}
+
+.product-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.product-card {
+  position: relative;
+}
+
+.product-actions {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
+.product-card img,
+.farmer-card img {
+  width: 100%;
+  height: 12rem;
+  object-fit: cover;
+}
+
+/* Cards content */
+.product-card .product-info,
+.farmer-card .farmer-info {
+  padding: 1.25rem;
+}
+
+.product-card h3,
+.farmer-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #266426;
+}
+
+.farm-name {
+  background: #266426;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+}
+
+/* Search/Sort has to Stack on mobile */
+.search-sort-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem 0;
+}
+
+.search-sort-bar input,
+.search-sort-bar select {
+  padding: 0.875rem;
+  border: 2px solid #ddd;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+}
+
+/* Tables Mobile card layout */
+.trolley-table,
+.stock-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+@media (max-width: 768px) {
+  .trolley-table,
+  .stock-table {
+    border: 0;
+  }
+  
+  .trolley-table thead {
+    display: none;
+  }
+  
+  .trolley-table tr,
+  .stock-table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: 1rem;
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.1);
+    overflow: hidden;
+  }
+  
+  .trolley-table td,
+  .stock-table td {
+    border-bottom: 1px solid #eee;
+    display: block;
+    text-align: right;
+    position: relative;
+    padding: 1rem 1rem 1rem 50%;
+    font-size: 0.95rem;
+  }
+  
+  .trolley-table td::before,
+  .stock-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 1rem;
+    width: 45%;
+    font-weight: 600;
+    color: #555;
+    text-align: left;
+  }
+  
+  .quantity-controls {
+    justify-content: center;
+    gap: 0.5rem;
+  }
+}
+
+@media (min-width: 769px) {
+  .trolley-table th,
+  .trolley-table td,
+  .stock-table th,
+  .stock-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    min-width: 6rem;
+  }
+}
+
+/* Trolley summary */
+.trolley-summary {
+  max-width: 25rem;
+  margin-left: auto;
+  padding: 1.5rem;
+  background: #f9f9f9;
+  border-radius: 1rem;
+}
+
+/* Quantity controls */
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.quantity-controls button {
+  width: 3rem;
+  height: 3rem;
+  border: 2px solid #266426;
+  background: white;
+  color: #266426;
+  font-size: 1.25rem;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.quantity-controls button:hover {
+  background: #266426;
+  color: white;
+}
+
+.quantity-controls input {
+  width: 4rem;
+  text-align: center;
+  border: 2px solid #ddd;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+
+.faq-item {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.08);
+}
+
+.faq-question {
+  padding: 1rem 1.25rem;
+  background: #f9f9f9;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  display: block;
+  min-height: 3rem;
+  user-select: none;
+  transition: background-color 0.2s ease;
+  border: none;
+  width: 100%;
+  text-align: left;
+}
+
+.faq-question:hover {
+  background-color: #efefef;
+}
+
+.faq-item.active .faq-question {
+  background-color: #e8e8e8;
+}
+
+
+.faq-answer {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.35s ease, opacity 0.3s ease, padding 0.3s ease;
+  background: #266426;
+  color: #ffffff;
+  padding: 0 1.25rem; 
+}
+
+.faq-item.active .faq-answer {
+  opacity: 1;
+  padding: 1rem 1.25rem;
+}
+
+.faq-answer p,
+.faq-answer ul,
+.faq-answer li {
+  color: #ffffff;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.faq-answer ul {
+  padding-left: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+
+footer {
+  background: #266426;
+  color: white;
+  padding: 2.5rem 0;
+}
+
+footer .container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+  text-align: center;
+}
+
+footer h4 {
+  margin-bottom: 0.75rem;
+}
+
+footer p,
+footer a {
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+
+.error-message {
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 0.95rem;
+  background: #fee;
+  color: #c33;
+  border: 1px solid #fcc;
+}
+
+.success-message {
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 0.95rem;
+  background: #efe;
+  color: #3c3;
+  border: 1px solid #cfc;
+}
+
+
+
+
+@media (min-width: 481px) {
+  html { font-size: 17px; }
+  .container { padding: 0 1.25rem; }
+  .hero { gap: 2rem; padding: 3rem 0; }
+  .hero-card img { height: 45vh; }
+  .product-grid,
+  .farmer-grid,
+  .dashboard-grid { gap: 2rem; }
+}
+
+
+@media (min-width: 769px) {
+  body { font-size: 1.125rem; } 
+  
+  .container {
+    max-width: 1200px;
+    padding: 0 1.25rem;
+  }
+  
+  .hero {
+    flex-direction: row;
+    gap: 2rem;
+    padding: 4rem 0;
+  }
+  
+  .hero-card {
+    min-height: 500px;
+  }
+  
+  .hero-card img {
+    height: 500px;
+  }
+  
+  .hero-card .overlay {
+    padding: 2rem;
+  }
+  
+  .hero-card .overlay h2 {
+    font-size: 1.75rem;
+  }
+  
+  .hero-card .overlay p {
+    font-size: 1.125rem;
+  }
+  
+  .product-grid,
+  .farmer-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  
+  .dashboard-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  
+  .search-sort-bar {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .search-sort-bar input[type="text"] {
+    flex: 1;
+    margin-right: 1rem;
+  }
+  
+  .form-container {
+    max-width: 450px;
+    padding: 2.5rem;
+    margin: 4rem auto;
+  }
+  
+  .trolley-table th,
+  .trolley-table td {
+    padding: 0.9375rem;
+  }
+  
+  footer .container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+}
+
+
+/*for large desktop*/
+@media (min-width: 1025px) {
+  .product-grid,
+  .farmer-grid {
+    gap: 1.5rem;
+  }
+  
+  .product-card img,
+  .farmer-card img {
+    height: 12.5rem;
+  }
+}
+
+/* ensure its valid for 390px  */
+@media (max-width: 390px) {
+  .container { padding: 0 0.875rem; }
+  body { font-size: 0.9rem; }
+  
+
+  header { padding-bottom: 1rem; }
+  .hero { padding: 1.5rem 0; }
+  .hero-card img { height: 35vh; }
+}
