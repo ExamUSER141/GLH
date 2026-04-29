@@ -23,3 +23,6 @@ For those who want to test the logged in user flow you can either register or us
 email : Johnsmith@gmail.com
 
 password: HelloHello
+
+
+(producer log in information will be shared to a more controlled group)
